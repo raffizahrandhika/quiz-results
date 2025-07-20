@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Hasil Quiz Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">R-QUEST</h1>
+                <p class="header-subtitle">Raffi's Quizzes, Exercises, and Smart Training</p>
+            </div>
+        </div>
+    </header>
+    <div id="quiz-results-container">
+        <!-- Header dengan search bar -->
+        <div class="header-container">
+            <div class="search-container">
+                <div class="profile-icon">
+                    <img alt="Profile Icon" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" />
+                </div>
+                <input id="username" placeholder="Masukkan username..." type="text" />
+                <button id="search-button">
+                    <img alt="Search Icon" src="https://cdn-icons-png.flaticon.com/512/751/751463.png" />
+                </button>
+            </div>
+        </div>
+
+        <h1>Hasil Quiz Challenge</h1>
+
+        <div class="profile-container">
+            <div class="rank-container">
+                <div class="rank-label">Peringkat</div>
+                <div class="rank" id="participant-rank">-</div>
+            </div>
+            <div class="profile-info">
+                <div class="instagram-info">
+                    <img alt="Instagram Icon" class="instagram-icon"
+                        src="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
+                    <div class="username" id="participant-username">-</div>
+                </div>
+                <div class="fullname" id="participant-name">-</div>
+            </div>
+        </div>
+
+        <div class="score-display">
+            <div class="score-label">Total Skor</div>
+            <div class="score-value" id="total-score">-</div>
+            <div class="max-score">dari 1000 poin maksimal</div>
+            <div class="congrats-message empty" id="congrats-message">
+                Silahkan masukkan username untuk melihat hasil quiz.
+            </div>
+        </div>
+
+        <div id="browser-warning">
+            ⚠ Untuk download sertifikat, buka halaman ini di <b>Browser Chrome</b> atau <b>Browser bawaan HP</b> melalui
+            menu "Buka di Browser"
+        </div>
+
+        <div class="certificate-container" id="certificateContainer">
+            <div class="certificate-title">Sertifikat Apresiasi</div>
+            <div class="certificate-buttons">
+                <button class="certificate-btn download-certificate-btn" id="downloadCertificateBtn">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor" />
+                    </svg>
+                    Download PNG
+                </button>
+                <a href="certificate-generator.html" class="certificate-btn custom-certificate-btn">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
+                            fill="currentColor" />
+                    </svg>
+                    Custom Nama
+                </a>
+            </div>
+        </div>
+
+        <h3>Detail Jawaban</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Landmark</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
+                        <th>Skor</th>
+                    </tr>
+                </thead>
+                <tbody id="answer-details">
+                    <!-- Data akan diisi oleh JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <table class="weight-table">
+            <caption>Informasi Distribusi Jawaban dan Bobot Soal</caption>
+            <thead>
+                <tr>
+                    <th rowspan="2">No.</th>
+                    <th rowspan="2">Landmark</th>
+                    <th colspan="4">Persentase Jawaban Peserta</th>
+                    <th rowspan="2">Kunci</th>
+                    <th rowspan="2">Kesulitan (b)</th>
+                    <th rowspan="2">Bobot Awal</th>
+                    <th rowspan="2">Bobot Akhir</th>
+                </tr>
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                </tr>
+            </thead>
+            <tbody id="weight-table-body">
+                <!-- Data akan diisi oleh JavaScript -->
+            </tbody>
+        </table>
+
+        <div class="info-link-container">
+            <a href="#" id="irtInfoLink">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                        stroke="#006eff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 16V12" stroke="#006eff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M12 8H12.01" stroke="#006eff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                Bagaimana Skor Anda Dihitung?
+            </a>
+        </div>
+
+        <div class="view-answers-btn-container">
+            <button class="view-answers-btn" id="viewAnswersBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                        fill="currentColor" />
+                </svg>
+                Lihat Jawaban
+            </button>
+            <button class="download-results-btn" id="downloadResultsBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor" />
+                </svg>
+                Download PDF
+            </button>
+        </div>
+
+        <div class="answers-section" id="answersSection">
+            <h3>Detail Jawaban Peserta</h3>
+            <div id="answersContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal Feedback -->
+    <div id="feedbackFab">
+        <button id="openFeedbackBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Feedback
+        </button>
+    </div>
+
+    <!-- Modal untuk preview sertifikat -->
+    <div id="certificateModal">
+        <div>
+            <h3>🎖️ Preview Sertifikat 🎖️</h3>
+            <img id="certificatePreview" src="" alt="Preview Sertifikat">
+            <p>Ini adalah preview sertifikat Anda. Silakan download untuk menyimpannya.</p>
+            <div>
+                <button id="confirmDownloadBtn">Download</button>
+                <button id="cancelDownloadBtn">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk browser warning -->
+    <div id="browserWarningModal">
+        <div>
+            <h3>⚠️ Eh Wait, Ada Problem Nih!</h3>
+            <p>Halo! Mau download sertifikat sama hasil kuis PDF-nya? Sayangnya browser Instagram gak bisa buat download
+                file gitu 😅 Jadi harus buka di <b>Chrome</b> atau <b>browser bawaan HP</b> dulu ya!<br><br>
+                Gampang kok caranya:<br>
+                1. Tap ikon <b>⋯</b> (titik tiga) di pojok kanan atas<br>
+                2. Pilih <b>"Buka di Browser"</b> atau <b>"Open in Browser"</b><br><br>
+                Trust me, it's gonna work perfectly! 💯</p>
+            <button id="closeBrowserWarningBtn">Oke Siap! 👍</button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Form Saran -->
+    <div id="feedbackModal">
+        <div>
+            <div>
+                <h3>Form Saran & Kritik</h3>
+                <button id="closeFeedbackModal">&times;</button>
+            </div>
+
+            <form id="customFeedbackForm">
+                <div>
+                    <label>
+                        Nama Anda
+                        <span id="usernameBadge"></span>
+                    </label>
+                    <input type="text" id="feedbackName" name="entry.1850594242" required>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="anonymousCheckbox">
+                    <label for="anonymousCheckbox">Kirim sebagai Anonymous</label>
+                </div>
+
+                <div>
+                    <label>Saran/Kritik</label>
+                    <textarea id="feedbackMessage" name="entry.933094874" rows="5" required></textarea>
+                </div>
+
+                <button type="submit">Kirim Saran</button>
+            </form>
+
+            <div id="feedbackSuccess">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.86"
+                        stroke="#4BB543" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 4L17.59 8.41 9.17 16.83 5 12.71" stroke="#4BB543" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Terima kasih! Saran Anda telah terkirim.
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Penjelasan IRT -->
+    <div id="irtInfoModal">
+        <div>
+            <div>
+                <h3 id="modalTitle">Bagaimana Skor Anda Dihitung?</h3>
+                <button id="closeIrtModal">&times;</button>
+            </div>
+
+            <div>
+                <p id="irtOpeningMessage"></p>
+
+                <h4>Berikut adalah beberapa poin kunci tentang cara penghitungan skor Anda:</h4>
+
+                <h4>1. Setiap Soal Memiliki "Bobot" yang Berbeda</h4>
+                <p>Dalam sistem ini, tidak semua soal memiliki nilai yang sama. Menjawab soal yang sulit akan memberikan
+                    penghargaan yang lebih besar daripada menjawab soal yang mudah.</p>
+
+                <h4>2. Tingkat Kesulitan Soal Ditentukan oleh Respon Seluruh Peserta</h4>
+                <p>Bagaimana sebuah soal ditentukan sulit atau mudah? Ini dianalisis dari data jawaban seluruh peserta.
+                </p>
+                <ul>
+                    <li><strong>Soal Sulit:</strong> Jika hanya sedikit peserta yang berhasil menjawab benar suatu soal,
+                        maka soal itu dianggap sulit.</li>
+                    <li><strong>Soal Mudah:</strong> Sebaliknya, jika banyak peserta yang berhasil menjawab benar, maka
+                        soal itu dianggap mudah.</li>
+                </ul>
+
+                <h4>3. Bobot Soal Disesuaikan Otomatis</h4>
+                <p>Berdasarkan tingkat kesulitannya:</p>
+                <ul>
+                    <li>Soal yang <strong>sulit</strong> dan berhasil dijawab benar akan memberikan <strong>poin yang
+                            lebih tinggi</strong>.</li>
+                    <li>Soal yang <strong>mudah</strong> dan berhasil dijawab benar akan memberikan <strong>poin yang
+                            standar atau sedikit lebih rendah</strong>.</li>
+                </ul>
+
+                <p><strong>Contoh:</strong> Misalkan ada soal "A" yang sangat sulit (hanya 13% peserta yang benar), dan
+                    ada soal "B" yang sangat mudah (78% peserta yang benar). Jika Anda menjawab <strong>soal "A" dengan
+                        benar</strong>, Anda akan mendapatkan skor misalnya <strong>139 poin</strong>. Namun, jika Anda
+                    menjawab <strong>soal "B" dengan benar</strong>, Anda mungkin hanya mendapatkan skor <strong>78
+                        poin</strong>. Ini berarti, dua peserta dengan jumlah jawaban benar yang sama bisa mendapatkan
+                    skor akhir yang berbeda, tergantung pada soal mana yang berhasil dijawab dengan benar.</p>
+
+                <h4>4. Jawaban Salah Tidak Mengurangi Poin</h4>
+                <p>Tidak ada pengurangan poin untuk jawaban yang salah. Jadi, peserta didorong untuk mencoba menjawab
+                    setiap soal!</p>
+
+                <h4>Mengapa Sistem Ini Lebih Baik?</h4>
+                <p>Sistem penilaian ini memungkinkan untuk:</p>
+                <ul>
+                    <li><strong>Mengukur Kemampuan Lebih Akurat:</strong> Skor bukan hanya tentang "berapa banyak yang
+                        benar", tapi "seberapa sulit soal yang berhasil ditaklukkan".</li>
+                    <li><strong>Perbandingan yang Lebih Adil:</strong> Memastikan bahwa peserta yang mampu menjawab
+                        soal-soal lebih kompleks mendapatkan penghargaan yang sesuai.</li>
+                </ul>
+            </div>
+
+            <button id="closeIrtModalBtn">Mengerti, Tutup Penjelasan</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>R-QUEST</h3>
+                    <p>Interactive Learning Hub</p>
+                </div>
+                <div class="social-section">
+                    <h4 class="social-title">Connect With Me</h4>
+                    <div class="social-icons">
+                        <a href="https://youtube.com/@raffizahrandhika" class="social-icon" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://instagram.com/raffizahrandhika" class="social-icon" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://t.me/raffizahrandhika" class="social-icon" title="Telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="https://tiktok.com/@raffizahrandhika" class="social-icon" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://x.com/mrffzd" class="social-icon" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Load data and scripts -->
+    <script src="quiz-data.js"></script>
+    <script src="app.js"></script>
+    <!-- Tambahkan di bagian head HTML Anda -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+</body>
+
+</html>
